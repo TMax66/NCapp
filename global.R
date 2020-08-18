@@ -1,6 +1,7 @@
 library(tidyverse)
 library(shiny)
 library(googlesheets4)
+library(googlesheets)
 library(googledrive)
 library(knitr)
 library(kableExtra)
@@ -30,7 +31,9 @@ dati<-read_sheet(id$id)
 
 
 #tracciato record
-campi <- names(dati)
+campi <- c("sede", "Nnc", "pnorma", "origine", "riforigine", "descrizione", "dreg", 
+           "matricola", "ripetizione", "informazione", "rifinform", "sospensione", "valutazione", "altro", 
+           "cause", "azione", "rifAC", "correzione", "respcorr", "dtcorr", "verifica", "dtverif")
 
 #####FUNZIONE LOAD DATA- CARICA IL FILE DOPO L'AGGIUNTA DI NUOVI RECORD#######
 loadData <- function() {
@@ -38,6 +41,7 @@ loadData <- function() {
   ds<-read_sheet(id$id)
   
 }
+
 #-----------------------------------------------
 
 shinyjs::useShinyjs()
