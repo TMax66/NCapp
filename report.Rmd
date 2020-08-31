@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 
-## Struttura 
+## Struttura: ````r Sys.Date()```
 
 data registrazione: ```r Sys.Date()```
 
