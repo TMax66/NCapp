@@ -1,0 +1,13 @@
+name: NCapp
+title: NCapp
+username:
+account: izslerapp
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2733865
+bundleId: 3579065
+url: https://izslerapp.shinyapps.io/NCapp/
+when: 1598948036.05712
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .httr-oauth|README.md|report.pdf|oldversion/.DS_Store|oldversion/global.R|oldversion/server.R|oldversion/ui.R

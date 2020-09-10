@@ -1,17 +1,12 @@
 server <- function(input, output, session) {
     
-    # loadData <- function() {
-    #     ds<-read_sheet(id$id)
-    # }
-    
+   ####codice per inserire il nuovo record######
     formData <- reactive({
         data <- sapply(fields, function(x) input[[x]])
         data <- as.data.frame(t(data))
         data
     })
-    
-    
-    
+
     #######Codice per salvare nel  file del drive  i nuovi dati inseriti #####
     saveData <- function(data) {
         ss <- as_sheets_id(id$id)
@@ -43,7 +38,20 @@ server <- function(input, output, session) {
         
     })
     
-
+######REPORT####
+###Funzione per produrre e scaricare il il pdf del report###
+    
+    output$report <- downloadHandler(
+        filename = "NC.pdf",
+        content = function(f) {
+            e <- new.env()
+            # For each of the data sets selected, get the variable based on the string
+            #e$datasets <- lapply(input$datasets, get)
+            rmarkdown::render('report.Rmd', output_format = rmarkdown::pdf_document(),
+                              output_file=f,
+                              envir = e)
+        }
+    )  
     
     
 }

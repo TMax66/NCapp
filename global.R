@@ -1,7 +1,6 @@
 library(tidyverse)
 library(shiny)
 library(googlesheets4)
-library(googlesheets)
 library(googledrive)
 library(knitr)
 library(kableExtra)
@@ -25,7 +24,10 @@ id<-mydrive %>%
   select(2)
 # df<-read_sheet(id$id)
 
-fields <- c("sede", "Nnc", "pnorm", "origine", "riforigine", "descrizione", "dreg", "matricola")
+fields <- c("sede", "Nnc", "pnorm", "origine", "riforigine", "descrizione", "dreg", "matricola", 
+            "ripetizione","informazione","rifinfo","sospensione","valutazione","altro","cause",
+            "azione","rifac","correzione","respcorr","dtcorr"
+            )
 
 loadData <- function() {
 ds<-read_sheet(id$id)}

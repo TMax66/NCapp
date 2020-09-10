@@ -35,32 +35,66 @@ ui <- navbarPage("PG00/024-Registrazioni Non Conformità",
                                           textAreaInput("descrizione", "Descrizione")), 
                                           
                                           column(4, 
-                                                 dateInput("dreg", "Data registrazione")),
+                                                 dateInput("dreg", "Data registrazione", format = "dd-mm-yyyy")),
                                           column(4,
                                                  textInput("matricola", "Sigla/Matricola",  width = 100))
                                           
                                       ),
                                   hr(), 
                                   
+                                    wellPanel(
+                                      tags$p("Impatto della NC su Attività/Prove"),
+                                      fluidRow(
+                                        column( 4, 
+                                                selectInput("ripetizione", "Ripetizione", c("No", "Si"))),
+                                        column( 4, 
+                                                selectInput("informazione", "Informazione al cliente", c("No", "Si"))),
+                                        column( 4, 
+                                                textInput("rifinfo", "Rif. Informazioni"))),
+                                        
+                                        
+                                        fluidRow(  
+                                          column(4,
+                                                  selectInput("sospensione", "Sospensione attività/prova", c("No", "Si"))), 
+                                        column( 4, 
+                                                selectInput("valutazione", "Valutazione attività/prova precedenti", c("No", "Si"))),
+                                        column( 4, 
+                                                selectInput("altro", "Altro", c("No", "Si"))))
+                                      ),
+                                  hr(), 
                                   fluidRow(
+                                  wellPanel(
+                                  textAreaInput("cause", "Prima valutazione delle cause")), 
+                                  
+                                
+                                   
+                                      column( 4, 
+                                              selectInput("azione", "Azione/i", c("Sola Correzione", "Sola AC", "Correzione + AC"), width = 200 )),
+                                      
+                                      column( 4, 
+                                              
+                                              textInput("rifac", "Rif. AC.", width = 100))
+                                    ),
+                                
+                                  
+                                  hr(), 
+                                  
+                                  fluidRow( 
+                                  wellPanel(
+                                  textAreaInput("correzione", "Definizione correzione da attuare subito")),
+                                  
+                                 
+                                 
+                                      column(3,
+                                             textInput("respcorr", "Responsabile")),
+                                      column(3,
+                                             dateInput("dtcorr", "data correzione"))
+                                    ),
                                     
-                                    
-                                  ), 
+                          
                                   
                                   
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
+
                                   br(),
                                   hr(), 
                                   fluidRow(
@@ -75,8 +109,13 @@ ui <- navbarPage("PG00/024-Registrazioni Non Conformità",
                                           )
                                       )
                                       ))),
-                          )), 
-                 tabPanel("Visualizzazione", 
+                          ), 
+                          hr(),
+                          div(align="center",
+                              downloadButton("report","download Report"))), 
+                
+                 
+                  tabPanel("Visualizzazione", 
                           
                           DT::dataTableOutput("responsesTable")
                    

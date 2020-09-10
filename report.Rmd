@@ -1,25 +1,74 @@
 ---
-title: "Rapporto di Non Conformità"
+title: "PG 00/024 - Rapporto di Non Conformità"
 author: ""
 date: ""
 output: pdf_document
 ---
 
-
-## Struttura: ````r Sys.Date()```
-
-data registrazione: ```r Sys.Date()```
-
-
 ```{r setup, include=FALSE}
+library(googlesheets4)
+library(googledrive)
+library(tidyverse)
 library(knitr)
 library(pander)
 knitr::opts_chunk$set(echo = FALSE)
+
+options( 
+ gargle_oauth_cache = ".secrets", 
+ gargle_oauth_email = TRUE  
+ )  
+ drive_auth()  
+ gs4_auth(token = drive_token())  
+ mydrive<-drive_find(type = "spreadsheet") 
+ id<-mydrive %>%   
+ filter(name=="dtNC") %>%  
+ select(2) 
+ df<-read_sheet(id$id)
+ df<- df %>% 
+         mutate(dreg = as.character(as.Date(as.numeric(dreg),origin=as.Date("1970-01-01"))),
+                dtcorr = as.character(as.Date(as.numeric(dtcorr),origin=as.Date("1970-01-01"))))
 ```
 
-<!-- ```{r, results='asis'} -->
-<!-- panderOptions('knitr.auto.asis', FALSE) -->
-<!-- for(d in datasets) { -->
-<!--   pander::pander(d, split.table=120) -->
-<!-- } -->
-<!-- ``` -->
+## Struttura: ```r df$sede```
+
+#### N.rapporto di Non Conformità : ```r df$Nnc```
+#### Rif. al punto schema della PG 00/024 E : ```r df$pnorma```
+
+#### Origine: ```r df$origine``` (rif. ```r df$riforgine```)
+
+<hr/>
+# Descrizione: 
+ ```r df$descrizione ```
+
+$~$
+
+###### Data registrazione :  ```r df$dreg ```,  $~$ $~$ Matricola:  ```r df$matricola ```
+
+<hr/>
+
+### Impatto della NC su Attività/Prove 
+
+* Ripetizione:  ```r df$ripetizione ```
+* Informazione al cliente:  ```r df$informazione ```,  $~$ $~$ rif.informazione ```r df$rifinfo ```
+* Sospensione della prova: ```r df$sospensione ``` 
+* Valutazione: ```r df$valutazione ```
+* Altro: ```r df$altro ```
+
+## Prima valutazione delle cause
+ ```r df$cause ```
+
+#### Azione: ```r df$azione ```  $~$ $~$ $~$ $~$ rif.AC : ```r df$rifac ```
+
+## Definizione correzione da attuare subito
+ ```r df$correzione ```
+ 
+##### Responsabile: ```r df$respcorr ``` $~$ $~$ $~$ $~$ Data correzione: ```r df$dtcorr ```
+
+
+
+
+
+
+
+
+
