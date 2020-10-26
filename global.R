@@ -8,10 +8,10 @@ library(DT)
 library(shinyjs)
 library(shinythemes)
 
-# options(gargle_oauth_cache = ".secrets")
-# gargle::gargle_oauth_cache()
-# drive_auth()
-# list.files(".secrets/")
+  options(gargle_oauth_cache = ".secrets")
+  gargle::gargle_oauth_cache()
+ drive_auth()
+ list.files(".secrets/")
 options(
   gargle_oauth_cache = ".secrets",
   gargle_oauth_email = TRUE
