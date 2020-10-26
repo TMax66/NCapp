@@ -45,8 +45,6 @@ server <- function(input, output, session) {
         filename = "NC.pdf",
         content = function(f) {
             e <- new.env()
-            # For each of the data sets selected, get the variable based on the string
-            #e$datasets <- lapply(input$datasets, get)
             rmarkdown::render('report.Rmd', output_format = rmarkdown::pdf_document(),
                               output_file=f,
                               envir = e)
